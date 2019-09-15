@@ -2,7 +2,18 @@
 //9/15/2019
 
 //This program is meant to be bound to a command via "cc -o [commandName] [programFile] and/or executed in a linux shell. This C program was written in vi, a text editor."
-//The purpose of this program is to take in one input file, read all characters and increment by one, then display the counter. If the parameter is -s, then it displays the character count after the program is done reading the file. If the parameter is -f, then it writes the character count to a new file.
+//The purpose of this program is to take in one input file, read all characters and 
+//increment by one, then display the counter. If the parameter is -s, then it displays 
+//the character count after the program is done reading the file. If the parameter is 
+//-f, then it writes the character count to a new file.
+//
+//USE AS DIRECTED OTHERWISE THINGS WILL BREAK!
+//
+//Possible complications: 
+//If argv[4] is provided (an output is provided) with -s option, then the output file will be created but nothing will be written, and nothing will be displayed.
+//If argv[2] (input file) is not readable, then the program won't work.
+//if argv[3] file name already exists, then this program will not overwrite the content inside the file.
+//Nothing will display if argv[1], argv[2], and argv[3] are NOT provided.
 
 //Including <stdio.h> for functions such as FILE, getc, printf, and fprintf.
 #include <stdio.h>
@@ -15,35 +26,36 @@ int main(int argc, char *argv[])
 {
   //This program is structure so that argv[2] will always be an input file
   //and argv[3] will always be an output file.
-  
-  FILE *infile = fopen(argv[2], "r"); //r means read
-  FILE *outfile = fopen(argv[3], "w"); //w means write
+  //
+  //Warning: Argv[1] stores the option. One option must be selected. Either -s or -f is mandatory for this program to do what it was designed.
+  FILE *infile = fopen(argv[2], "r"); //reads the input file
+  FILE *outfile = fopen(argv[3], "w"); //writes to an output file
   char c;
   int char_count = 0;
 
-  if ((argc == 3) && (strcmp(argv[1], "-s") == 0)) //check for argc amount and the option comparison using strcmp()
+  if ((argc == 3) && (strcmp(argv[1], "-s") == 0)) //check for argc amount and argv[1] comparison using strcmp()
   {
     while ( (c = getc(infile)) != EOF) //read characters until end of file
     {
       if ( (c != BLANK) && (c != NEWLINE) )
       {
-        char_count++;
+        char_count++; //increment character count if it reads a character that is not empty space or a new line
       }
     }
 
-    printf("%d characters\n", char_count);
+    printf("%d characters\n", char_count); //prints total character to screen
   }
 
-  if ((argc == 4) && (strcmp(argv[1], "-f") == 0))
+  if ((argc == 4) && (strcmp(argv[1], "-f") == 0)) //check for argc amount and argv[1] comparison using strcmp()
   {
-    while ( (c = getc(infile)) != EOF)
+    while ( (c = getc(infile)) != EOF) //reads character until end of file
     {
       if ( (c!= BLANK) && (c != NEWLINE) )
       {
-        char_count++;
+        char_count++; //increment character count if it reads a character that is not empty space or a new line
       }
     }
-    fprintf(outfile, "my file has %d chars\n", char_count);
+    fprintf(outfile, "my file has %d chars\n", char_count); //writes character count to specified file name
   }
   return 0;
 }
