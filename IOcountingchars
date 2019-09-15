@@ -1,7 +1,8 @@
 //Anthony Pham
 //9/15/2019
 
-//This program is meant to be bound to a command via "cc -o [commandName] [programFile] and/or executed in a linux shell. This C program was written in vi, a text editor."
+//This program is meant to be bound to a command via "cc -o [commandName] [programFile] 
+//and/or executed in a linux shell."
 //The purpose of this program is to take in one input file, read all characters and 
 //increment by one, then display the counter. If the parameter is -s, then it displays 
 //the character count after the program is done reading the file. If the parameter is 
@@ -10,10 +11,15 @@
 //USE AS DIRECTED OTHERWISE THINGS WILL BREAK!
 //
 //Possible complications: 
-//If argv[4] is provided (an output is provided) with -s option, then the output file will be created but nothing will be written, and nothing will be displayed.
+//
+//Lots of edge cases with invalid arguements, therefore you should strictly use this 
+//program as:
+//[command] [option-tag] [input file] [output file]
+//Nothing will display if argv[1], and argv[2] are NOT provided.
+//If argv[3] is provided (an output is provided) with -s option, then the output file 
+//will be created but nothing will be written, and nothing will be displayed.
 //If argv[2] (input file) is not readable, then the program won't work.
-//if argv[3] file name already exists, then this program will not overwrite the content inside the file.
-//Nothing will display if argv[1], argv[2], and argv[3] are NOT provided.
+//if argv[3] file name already exists, then this program will not overwrite the content //inside the file.
 
 //Including <stdio.h> for functions such as FILE, getc, printf, and fprintf.
 #include <stdio.h>
